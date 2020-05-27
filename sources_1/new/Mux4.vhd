@@ -36,7 +36,7 @@ entity Mux4 is
            x2 : in STD_LOGIC;
            x3 : in STD_LOGIC;
            x4 : in STD_LOGIC;
-           SEL: in STD_LOGIC_VECTOR(0 to 1);
+           SEL: in STD_LOGIC_VECTOR(1 downto 0);
            y : out STD_LOGIC);
 end Mux4;
 
@@ -44,7 +44,7 @@ architecture Behavioral of Mux4 is
 
 begin
 
-    with SEL(0 to 1) select y <=  
+    with SEL(1 downto 0) select y <=  
         x1 when "00",
         x2 when "01",
         x3 when "10",

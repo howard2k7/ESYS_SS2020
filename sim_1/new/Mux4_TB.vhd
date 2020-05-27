@@ -42,7 +42,7 @@ component Mux4 is
             x2 : in STD_LOGIC;
             x3 : in STD_LOGIC;
             x4 : in STD_LOGIC;
-            SEL: in STD_LOGIC_VECTOR(0 to 1);
+            SEL: in STD_LOGIC_VECTOR(1 downto 0);
             y : out STD_LOGIC);
 end component;
 
@@ -50,7 +50,7 @@ signal x1_TB :  STD_LOGIC := '0';
 signal x2_TB :  STD_LOGIC := '0';
 signal x3_TB :  STD_LOGIC := '0';
 signal x4_TB :  STD_LOGIC := '0';
-signal SEL_TB:  STD_LOGIC_VECTOR(0 to 1) := "00";
+signal SEL_TB:  STD_LOGIC_VECTOR(1 downto 0) := "00";
 signal y_TB :  STD_LOGIC := '0';
 
 begin
