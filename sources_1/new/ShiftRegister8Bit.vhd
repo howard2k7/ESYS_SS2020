@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 05/27/2020 12:44:05 PM
+-- Create Date: 06/18/2020 06:10:22 PM
 -- Design Name: 
--- Module Name: DMux4 - Behavioral
+-- Module Name: ShiftRegister8Bit - Behavioral
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -31,26 +31,29 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity DMux4 is
-    Port ( x1 : in STD_LOGIC;
-           SEL : in STD_LOGIC_VECTOR(0 to 1);
-           y1 : out STD_LOGIC;
-           y2 : out STD_LOGIC;
-           y3 : out STD_LOGIC;
-           y4 : out STD_LOGIC);
-end DMux4;
+entity ShiftRegister8Bit is
+    Port ( clk : in STD_LOGIC;
+           reset : in STD_LOGIC;
+           shift_x : in STD_LOGIC;
+           shift_y : out STD_LOGIC_VECTOR(7 downto 0));
+end ShiftRegister8Bit;
 
-architecture Behavioral of DMux4 is
-
+architecture Behavioral of ShiftRegister8Bit is
+    signal shift_register : std_logic_vector (7 downto 0) := x"10";
+    
+    
 begin
 
-    y1 <=   x1 when SEL = "00" else
-            '0';
-    y2 <=   x1 when SEL = "01" else 
-            '0';
-    y3 <=   x1 when SEL = "10" else 
-            '0';
-    y4 <=   x1 when SEL = "11" else 
-            '0';
+    proc_name: process(clk, reset)
+    begin
+        if reset = '1' then
+            shift_register <= x"00";
+        elsif rising_edge(clk) then
+            shift_register <= shift_register(6 downto 0) & shift_x;
+        end if;
+    end process proc_name;
+    
+    shift_y <= shift_register(7 downto 0);
+    
 
 end Behavioral;
